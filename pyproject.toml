@@ -1,0 +1,28 @@
+[project]
+name = "extractor"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "stadiello",email = "tadiello.sebastien@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12.8,<4.0"
+dependencies = [
+    "pandas (>=2.2.3,<3.0.0)",
+    "ollama (>=0.4.8,<0.5.0)",
+    "selenium (>=4.32.0,<5.0.0)",
+    "beautifulsoup4 (>=4.13.4,<5.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "webdriver-manager (>=4.0.2,<5.0.0)",
+    "streamlit (>=1.45.1,<2.0.0)",
+    "watchdog (>=6.0.0,<7.0.0)",
+    "transformers (>=4.51.3,<5.0.0)",
+]
+
+[tool.poetry]
+packages = [{include = "extractor", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
