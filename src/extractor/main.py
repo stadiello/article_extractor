@@ -1,11 +1,6 @@
 import streamlit as st
 from scrap import Scraper
 from bot import OllamaClient
-from fastSum import FastSum
-# import asyncio
-# import nest_asyncio
-# nest_asyncio.apply()
-# asyncio.set_event_loop(asyncio.new_event_loop())
 
 
 def bot(text):
@@ -15,10 +10,6 @@ def bot(text):
 def summary(text):
     client = OllamaClient()
     return client.summary(text)
-
-def fastSum(text):
-    client = FastSum()
-    return client.summarize(text)
 
 def main():
     st.title("Article extractor")
