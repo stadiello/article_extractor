@@ -1,14 +1,14 @@
-# Extractor
+# article_extractor
 
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/SCOR-extractor.git
+    https://github.com/stadiello/article_extractor
     ```
 2. Navigate to the project directory:
     ```bash
-    cd SCOR-extractor
+    cd article_extractor
     ```
 3. Install dependencies using `pyproject.toml`:
     ```bash
