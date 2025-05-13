@@ -1,7 +1,5 @@
 import ollama
 import re
-import csv
-from io import StringIO
 
 questions = []
 with open('data/questions.txt', 'r') as file:
