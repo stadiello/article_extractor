@@ -3,6 +3,11 @@ import re
 import csv
 from io import StringIO
 
+questions = []
+with open('data/questions.txt', 'r') as file:
+    for line in file:
+        questions.append("- " + line.strip() + "\n")
+
 class OllamaClient:
     def __init__(self, temp=None):
         self.model_name = "deepseek-r1:8b"
@@ -25,21 +30,18 @@ class OllamaClient:
         return re.sub(r"<think>.*?</think>", "",  result['response'], flags=re.DOTALL)
 
     def generation(self, input_text):
+        
         prompt = (
             "You are a bot specialized in legal data extraction.\n\n"
             "If the following text is about lawsuit, process following instruction, otherwise anwser 'No Lawsuit'\n"
             "From the following text, extract answers to these questions:\n"
-            "- When was the claim brought?\n"
-            "- What are the claims?\n"
-            "- Who is the Defendant?\n"
-            "- Who is bringing the proceeding?\n"
-            "- What are the claimed damages?\n\n"
-            # "Give a format as **CSV** with no explanation, just raw answers in this order: date,claims,defendant,plaintiff,damages\n"
-            # "with one header line and one row:\n"
+            f"{' '.join(questions)}\n"
             "Date,Claims,Defendant,Plaintiff,Damages\n"
             "Be concise and do not add any other information.\n"
             "Just question and answer, no explanation.\n"
             "If the text is not about lawsuit, just answer 'No Lawsuit'.\n\n"
+            "If the question is not in the text, just answer 'No Answer'.\n"
+            "If the answer is not in the text, just answer 'No Answer'.\n"
             "Text:\n"
 
             f"Text:\n{input_text}\n"

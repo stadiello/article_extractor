@@ -24,6 +24,10 @@ streamlit run src/extractor/main.py
 
 Connect at the url and follow the instructions.
 
+## Add or modify questions
+
+You just have to add your new question on a new line in the questions.txt in the folder data.
+
 ## Contact
 
 For questions or support, please contact the development team at `support@example.com`.
