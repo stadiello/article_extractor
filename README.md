@@ -14,6 +14,10 @@
     ```bash
     pip install .
     ```
+3. (BIS) Install dependencies using `poetry`:
+    ```bash
+    poetry install
+    ```
 
 ## Usage
 

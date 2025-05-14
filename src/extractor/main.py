@@ -1,7 +1,24 @@
 import streamlit as st
 from scrap import Scraper
 from bot import OllamaClient
+import pandas as pd
+import io
+import re
 
+def parse_bot_response(response):
+    """
+    Parse the response from the bot and return a dictionary of questions and answers.
+    """
+    if "no nawsuit" in response.lower():
+        return None
+    
+    lines = response.strip().split('\n')
+    data = {}
+    for line in lines:
+        if ':' in line:
+            question, answer = line.split(':', 1)
+            data[question.strip()] = answer.strip()
+    return data
 
 def bot(text):
     client = OllamaClient()
@@ -31,8 +48,6 @@ def main():
 
                     progress_placeholder = st.empty()
                     progress_bar = progress_placeholder.progress(0)
-
-                # progress_bar = st.progress(0)
                     
                     progress_bar.progress(33)
                     st.success(f"Scraping of {url} is done!")
@@ -41,10 +56,20 @@ def main():
                         bot_result = bot(result)
                         progress_bar.progress(66)
                         st.write(bot_result)
+                        
+                        # Préparer les données pour le CSV
+                        parsed_data = parse_bot_response(bot_result)
+                        if parsed_data:
+                            df = pd.DataFrame([parsed_data])
+                            csv = df.to_csv(index=False)
+                            st.download_button(
+                                label="Télécharger les réponses (CSV)",
+                                data=csv,
+                                file_name="responses.csv",
+                                mime="text/csv"
+                            )
                     
                     with st.spinner('Generating summary...'):
-                        # if mode == "Fast":
-                        #     summary_result = fastSum(result)
                         if mode == "Efficient":
                             summary_result = summary(result)
                         elif mode == "No summary":
